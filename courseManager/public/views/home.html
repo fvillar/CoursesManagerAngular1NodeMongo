@@ -1,0 +1,32 @@
+<div class="container content">
+    <div class="jumbotron">
+        <h1>Course Manager</h1>
+    </div>
+    <div>
+        <table class="table table-hover table-condensed" ng-controller="HomeController as homeCtrl">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Author Name</th>
+                    <th>Length</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    <tr ng-repeat="course in courses">
+                        <td>{{course.Id}}</td>
+                        <td>{{course.title}}</td>
+                        <td>{{course.authorName}}</td>
+                        <td>{{course.length}}</td>
+                        <td>{{course.category}}</td>
+                        <td>
+                            <button type="button" class="btn btn-info">Update</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </thead>
+        </table>
+    </div>
+</div>
