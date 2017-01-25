@@ -9,29 +9,21 @@ angular.module('app')
             $scope.loading = true;
 
             coursesFactory.query(
-                function (response) {
+                (response) => {
                     $scope.courses = response;
                     $scope.loading = false;
                 },
-                function (response) {
+                (response) => {
                     $scope.message = "Error: " + response.status + " " + response.statusText;
                 }
             );
 
-            $scope.deleteCourse = function (id) {
+            $scope.deleteCourse =  (id) => {
                 courseFactory.delete(id,
-                    function (response) {
-                        coursesFactory.query(
-                            function (response) {
-                                $scope.courses = response;
-                                $scope.loading = false;
-                            },
-                            function (response) {
-                                $scope.message = "Error: " + response.status + " " + response.statusText;
-                            }
-                        );
+                    (response) => {
+                        $scope.courses = coursesFactory.query();                            
                     },
-                    function (response) {
+                    (response) => {
                         $scope.message = "Error: " + response.status + " " + response.statusText;
                     }
                 );
