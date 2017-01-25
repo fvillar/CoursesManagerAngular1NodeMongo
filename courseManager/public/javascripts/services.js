@@ -6,7 +6,14 @@ angular.module('app')
     .factory('coursesFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
         return $resource(baseURL + "courses", null, {
-            'query': { method: 'GET', isArray: true },
+            'query': { method: 'GET', isArray: true }
+        });
+    }])
+
+    .factory('courseFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "courses/:id", {id: '@id'}, {
+            'delete': { method: 'DELETE' }
         });
     }])
 

@@ -32,5 +32,15 @@ angular.module('app', ['ui.router','ngResource'])
                 }
             })
 
+            // route for the updateCourse page
+            .state('app.course', {
+                url: 'course/:id',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/course.html'
+                    }
+                }
+            })
+
         $urlRouterProvider.otherwise('/');
     });

@@ -1,4 +1,7 @@
-<div class="container content">
+<div class="container" ng-if="loading">
+    <h1>{{message}}</h1>
+</div>
+<div class="container content" ng-if="!loading">
     <div class="jumbotron">
         <h1>Course Manager Angular 1</h1>
     </div>
@@ -21,8 +24,10 @@
                         <td>{{course.length}}</td>
                         <td>{{course.category}}</td>
                         <td>
-                            <button type="button" class="btn btn-info">Update</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-info" ui-sref="app.course({id: course.Id})">
+                                Update
+                            </button>
+                            <button type="button" class="btn btn-danger" ng-click="deleteCourse({id: course.Id})">Delete</button>
                         </td>
                     </tr>
                 </tbody>
