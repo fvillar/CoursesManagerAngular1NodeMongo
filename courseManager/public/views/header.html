@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="app">Courses Manager</a>
+            <a class="navbar-brand" ng-class="{active: stateis('app')}" ui-sref="app">Courses Manager</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,10 +21,10 @@
                             </span>
                             </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li ng-class="{active: stateis('app.newCourse')}">
+                    <a ui-sref="app.newCourse">                        
                         Add
-                        </a>
+                    </a>
                 </li>
                 <li ng-class="{active: stateis('app.aboutus')}">
                     <a ui-sref="app.aboutus">                        

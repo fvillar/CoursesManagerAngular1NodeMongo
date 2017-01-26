@@ -34,10 +34,21 @@ angular.module('app', ['ui.router','ngResource'])
 
             // route for the updateCourse page
             .state('app.course', {
-                url: 'course/:id',
+                url: 'courses/:id',
                 views: {
                     'content@': {
-                        templateUrl: 'views/course.html'
+                        templateUrl: 'views/course.html',
+                        controller: 'UpdateController'
+                    }
+                }
+            })
+
+            .state('app.newCourse', {
+                url: 'course/',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/newCourse.html',
+                        controller: 'AddController'
                     }
                 }
             })

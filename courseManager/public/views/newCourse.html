@@ -1,16 +1,5 @@
-<div class="container" ng-if="loading">
-    <h1>{{message}}</h1>
-</div>
-
-<div class="container content" ng-if="!loading">
-    <form class="form-horizontal">
-
-        <div class="form-group">
-            <label for="inputId" class="col-sm-2 control-label">Id</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputId" ng-model="course.Id">
-            </div>
-        </div>
+<div class="container content">
+    <form class="form-horizontal" ng-submit="addCourse()">
 
         <div class="form-group">
             <label for="inputTitle" class="col-sm-2 control-label">Title</label>
@@ -43,7 +32,7 @@
 
         <div class="form-group">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="button" class="btn btn-primary" ng-click="updateCourse()">Save</button>
+                <button type="button" class="btn btn-primary" ng-click="addCourse()">Add</button>
                 <button type="button" class="btn btn-danger" ng-class="{active: stateis('app')}" ui-sref="app">Cancel</button>
             </div>
         </div>

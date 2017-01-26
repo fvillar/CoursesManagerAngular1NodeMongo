@@ -12,8 +12,18 @@ angular.module('app')
 
     .factory('courseFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
-        return $resource(baseURL + "courses/:id", {id: '@id'}, {
-            'delete': { method: 'DELETE' }
+        return $resource(baseURL + "courses/:id", {}, {
+            'query': { method: 'GET', isArray: true },
+            'save':   {method:'POST'},
+            'update': { method: 'PUT', params: { id: '@id' } },
+            'delete': { method: 'DELETE', params: { id: '@id' } }
+        });
+    }])
+
+    .factory('authorsFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "authors", null, {
+            'query': { method: 'GET', isArray: true }
         });
     }])
 
