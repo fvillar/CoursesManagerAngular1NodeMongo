@@ -37,6 +37,8 @@ angular.module('app')
             $scope.message = "Loading Course...";
             $scope.loading = true;
 
+            $scope.regex = '\\d+:?\\d*';
+
             $scope.course =
                 courseFactory.query({
                     id: $stateParams.id
@@ -85,7 +87,8 @@ angular.module('app')
                 "length": '',
                 "category": ''
             };
-
+            
+            $scope.regex = '\\d+:?\\d*';
 
             $scope.authors =
                 authorsFactory.query(

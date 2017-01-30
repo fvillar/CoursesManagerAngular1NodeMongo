@@ -3,47 +3,53 @@
 </div>
 
 <div class="container content" ng-if="!loading">
-    <form class="form-horizontal">
+    <form class="form-horizontal" name="courseForm" ng-submit="updateCourse()" novalidate>
 
         <div class="form-group">
             <label for="inputId" class="col-sm-2 control-label">Id</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputId" ng-model="course.Id">
+                <input type="text" class="form-control" id="inputId" ng-model="course.Id" disabled>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': courseForm.inputTitle.$error.required && !courseForm.inputTitle.$pristine}">
             <label for="inputTitle" class="col-sm-2 control-label">Title</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputTitle" ng-model="course.title">
+                <input type="text" class="form-control" id="inputTitle" name="inputTitle" ng-model="course.title" ng-required="true">
+                <span ng-show="courseForm.inputTitle.$error.required && !courseForm.inputTitle.$pristine">Title is a required field</span>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': courseForm.authorsSelect.$error.required && !courseForm.authorsSelect.$pristine}">
             <label for="inputAuthor" class="col-sm-2 control-label">Author</label>
             <div class="col-sm-6">
-                <select name="authorsSelect" class="form-control" id="inputAuthor" ng-model="course.authorId" ng-options="author.Id as author.firstName+ ' '+author.lastName for author in authors ">
+                <select name="authorsSelect" class="form-control" id="inputAuthor" ng-model="course.authorId" ng-options="author.Id as author.firstName+ ' '+author.lastName for author in authors" ng-required="true">
+                    <option value="">-- Select Author --</option>
                 </select>
+                <span ng-show="courseForm.authorsSelect.$error.required && !courseForm.authorsSelect.$pristine">Author is a required field</span>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': courseForm.inputCategory.$error.required && !courseForm.inputCategory.$pristine}">
             <label for="inputCategory" class="col-sm-2 control-label">Category</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputCategory" ng-model="course.category">
+                <input type="text" class="form-control" id="inputCategory" name="inputCategory" ng-model="course.category" ng-required="true">
+                <span ng-show="courseForm.inputCategory.$error.required && !courseForm.inputCategory.$pristine">Category is a required field</span>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': (courseForm.inputLength.$error.required && !courseForm.inputLength.$pristine) || (!courseForm.inputLength.$valid && !courseForm.inputLength.$pristine)}">
             <label for="inputLength" class="col-sm-2 control-label">Length</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputLength" ng-model="course.length">
+                <input type="text" class="form-control" id="inputLength" name="inputLength" ng-model="course.length" ng-required="true" ng-pattern="regex">
+                <div ng-show="courseForm.inputLength.$error.required && !courseForm.inputLength.$pristine"><span>Length is a required field</span><br></div>
+                <span ng-show="!courseForm.inputLength.$error.required && !courseForm.inputLength.$valid && !courseForm.inputLength.$pristine">Please enter a length in the following format mm:ss</span>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="button" class="btn btn-primary" ng-click="updateCourse()">Save</button>
+                <button type="button" class="btn btn-primary" ng-disabled="courseForm.$invalid" ng-click="updateCourse()">Save</button>
                 <button type="button" class="btn btn-danger" ng-class="{active: stateis('app')}" ui-sref="app">Cancel</button>
             </div>
         </div>

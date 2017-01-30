@@ -9,30 +9,31 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': courseForm.authorsSelect.$error.required && !courseForm.authorsSelect.$pristine}">
             <label for="inputAuthor" class="col-sm-2 control-label">Author</label>
             <div class="col-sm-6">
 
-                <select name="authorsSelect" class="form-control" id="inputAuthor" name="inputAuthor" ng-model="course.authorId" ng-options="author.Id as author.firstName+ ' '+author.lastName for author in authors" required>
-                    <!--<option value="">-- Select Author --</option>-->
+                <select name="authorsSelect" class="form-control" id="inputAuthor" ng-model="course.authorId" ng-options="author.Id as author.firstName+ ' '+author.lastName for author in authors" ng-required="true">
+                    <option value="">-- Select Author --</option>
                 </select>
-                <span ng-show="courseForm.inputAuthor.$error.required">Author is a required field</span>
+                <span ng-show="courseForm.authorsSelect.$error.required && !courseForm.authorsSelect.$pristine">Author is a required field</span>
             </div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': courseForm.inputCategory.$error.required && !courseForm.inputCategory.$pristine}">
             <label for="inputCategory" class="col-sm-2 control-label">Category</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputCategory" name="inputCategory" ng-model="course.category" required>
+                <input type="text" class="form-control" id="inputCategory" name="inputCategory" ng-model="course.category" ng-required="true">
                 <span ng-show="courseForm.inputCategory.$error.required && !courseForm.inputCategory.$pristine">Category is a required field</span>
             </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': courseForm.inputLength.$error.required && !courseForm.inputLength.$pristine}">
+        <div class="form-group" ng-class="{'has-error': (courseForm.inputLength.$error.required && !courseForm.inputLength.$pristine) || (!courseForm.inputLength.$valid && !courseForm.inputLength.$pristine)}">
             <label for="inputLength" class="col-sm-2 control-label">Length</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputLength" name="inputLength" ng-model="course.length" ng-pattern="regex" required>
-                <span ng-show="courseForm.inputLength.$error.required && !courseForm.inputLength.$pristine">Length is a required field</span>
+                <input type="text" class="form-control" id="inputLength" name="inputLength" ng-model="course.length" ng-pattern="regex" ng-required="true" ng-pattern="regex">
+                <div ng-show="courseForm.inputLength.$error.required && !courseForm.inputLength.$pristine"><span>Length is a required field</span><br></div>
+                <span ng-show="!courseForm.inputLength.$error.required && !courseForm.inputLength.$valid && !courseForm.inputLength.$pristine">Please enter a length in the following format mm:ss</span>
             </div>
         </div>
 
