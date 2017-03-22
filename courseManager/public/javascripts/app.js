@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ui.router','ngResource'])
+angular.module('app', ['ui.router', 'ngResource'])
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
 
@@ -8,10 +8,31 @@ angular.module('app', ['ui.router','ngResource'])
             .state('app', {
                 url: '/',
                 views: {
+                    'content': {
+                        templateUrl: 'views/login.html'
+                    }
+                }
+            })
+
+            // route for the home page
+            .state('app.register', {
+                url: 'register',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/register.html',
+                        controller: 'RegisterController'
+                    }
+                }
+            })
+
+            // route for the home page
+            .state('app.home', {
+                url: 'home',
+                views: {
                     'header': {
                         templateUrl: 'views/header.html'
                     },
-                    'content': {
+                    'content@': {
                         templateUrl: 'views/home.html',
                         controller: 'HomeController'
                     },
@@ -19,7 +40,6 @@ angular.module('app', ['ui.router','ngResource'])
                         templateUrl: 'views/footer.html',
                     }
                 }
-
             })
 
             // route for the aboutus page

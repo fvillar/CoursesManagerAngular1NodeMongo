@@ -13,8 +13,8 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li ng-class="{active: stateis('app')}">
+            <ul class="nav navbar-nav" ng-if="!loading">
+                <li ng-class="{active: stateis('app.home')}">
                     <a ui-sref="app">Home 
                         <span class="sr-only">
                             (current)

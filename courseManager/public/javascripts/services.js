@@ -14,7 +14,7 @@ angular.module('app')
 
         return $resource(baseURL + "courses/:id", {}, {
             'query': { method: 'GET', isArray: true },
-            'save':   {method:'POST'},
+            'save': { method: 'POST' },
             'update': { method: 'PUT', params: { id: '@id' } },
             'delete': { method: 'DELETE', params: { id: '@id' } }
         });
@@ -24,6 +24,20 @@ angular.module('app')
 
         return $resource(baseURL + "authors", null, {
             'query': { method: 'GET', isArray: true }
+        });
+    }])
+
+    .factory('registerFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "users", {}, {
+            'save': { method: 'POST' },
+        });
+    }])
+
+    .factory('loginFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "users", {}, {
+            'query': { method: 'GET', isArray: false },
         });
     }])
 

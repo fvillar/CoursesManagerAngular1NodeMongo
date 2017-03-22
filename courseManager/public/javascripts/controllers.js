@@ -87,7 +87,7 @@ angular.module('app')
                 "length": '',
                 "category": ''
             };
-            
+
             $scope.regex = '\\d+:?\\d*';
 
             $scope.authors =
@@ -99,7 +99,7 @@ angular.module('app')
                         $scope.message = "Error: " + response.status + " " + response.statusText;
                     }
                 );
-            
+
             $scope.addCourse = () => {
 
                 courseFactory.save($scope.course,
@@ -114,4 +114,46 @@ angular.module('app')
                 $state.go('app');
 
             };
-        }])        
+        }])
+
+    .controller('LoginController', ['$scope', '$state', '$stateParams', 'loginFactory',
+        function ($scope, $state, $stateParams, loginFactory) {
+            $scope.username='';
+            $scope.password=''
+
+            $scope.register = () => {
+
+                registerFactory.save({username: $scope.username, password:$scope.password},
+                    (response) => {
+                        $state.go('app.home');
+                    },
+                    (response) => {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+            }
+
+        }])
+
+    .controller('RegisterController', ['$scope', '$state', 'registerFactory',
+        function ($scope, $state, registerFactory) {
+
+            $scope.user = {
+                "firstName": '',
+                "lastName": '',
+                "username": '',
+                "password": ''
+            };
+
+            $scope.register = () => {
+
+                registerFactory.save($scope.user,
+                    (response) => {
+                        $state.go('app');
+                    },
+                    (response) => {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+            }
+        }])
