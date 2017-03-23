@@ -2,13 +2,15 @@
 
 angular.module('app')
 
-    .controller('HomeController', ['$scope', '$state', '$stateParams', 'coursesFactory', 'courseFactory',
-        function ($scope, $state, $stateParams, coursesFactory, courseFactory) {
+    .controller('HomeController', ['$scope', '$rootScope', '$state', '$stateParams', 'coursesFactory', 'courseFactory',
+        function ($scope, $rootScope, $state, $stateParams, coursesFactory, courseFactory) {
             $scope.message = "Loading ...";
             $scope.courses = [];
             $scope.loading = true;
 
-            coursesFactory.query(
+            coursesFactory.query({
+                username: $rootScope.username
+            }).$promise.then(
                 (response) => {
                     $scope.courses = response;
                     $scope.loading = false;
@@ -16,12 +18,14 @@ angular.module('app')
                 (response) => {
                     $scope.message = "Error: " + response.status + " " + response.statusText;
                 }
-            );
+                );
 
             $scope.deleteCourse = (id) => {
                 courseFactory.delete(id,
                     (response) => {
-                        $scope.courses = coursesFactory.query();
+                        $scope.courses = coursesFactory.query({
+                            username: $rootScope.username
+                        });
                     },
                     (response) => {
                         $scope.message = "Error: " + response.status + " " + response.statusText;
@@ -78,14 +82,15 @@ angular.module('app')
             };
         }])
 
-    .controller('AddController', ['$scope', '$state', '$stateParams', 'courseFactory', 'coursesFactory', 'authorsFactory',
-        function ($scope, $state, $stateParams, courseFactory, coursesFactory, authorsFactory) {
+    .controller('AddController', ['$scope', '$rootScope', '$state', '$stateParams', 'courseFactory', 'coursesFactory', 'authorsFactory',
+        function ($scope, $rootScope, $state, $stateParams, courseFactory, coursesFactory, authorsFactory) {
 
             $scope.course = {
                 "title": '',
                 "authorId": 0,
                 "length": '',
-                "category": ''
+                "category": '',
+                "username" : $rootScope.username
             };
 
             $scope.regex = '\\d+:?\\d*';
@@ -116,8 +121,8 @@ angular.module('app')
             };
         }])
 
-    .controller('LoginController', ['$scope', '$state', '$stateParams', 'loginFactory',
-        function ($scope, $state, $stateParams, loginFactory) {
+    .controller('LoginController', ['$scope', '$rootScope', '$state', '$stateParams', 'loginFactory',
+        function ($scope, $rootScope, $state, $stateParams, loginFactory) {
             $scope.username = '';
             $scope.password = '';
             $scope.showAlert = false;
@@ -130,9 +135,10 @@ angular.module('app')
                 }).$promise.then(
                     (response) => {
                         if (response.length > 0) {
-                            if (response[0].password == $scope.password)
+                            if (response[0].password == $scope.password) {
                                 $state.go('app.home');
-                            else
+                                $rootScope.username = $scope.username;
+                            } else
                                 $scope.showAlert = true;
                         } else {
                             $scope.showAlert = true;
