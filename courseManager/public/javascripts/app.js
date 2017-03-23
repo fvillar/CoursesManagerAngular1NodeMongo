@@ -9,7 +9,8 @@ angular.module('app', ['ui.router', 'ngResource'])
                 url: '/',
                 views: {
                     'content': {
-                        templateUrl: 'views/login.html'
+                        templateUrl: 'views/login.html',
+                        controller: 'LoginController'
                     }
                 }
             })

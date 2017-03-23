@@ -9,8 +9,13 @@
 
 <div class="container">
     <div class="jumbotron">
-        <div class="container">            
-            <div class="col-sm-8 col-sm-offset-2">                
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="alert alert-danger" ng-if="showAlert">
+                    {{message}}
+                </div>
+
                 <div class="col-md-6 col-md-offset-3">
                     <h2>Login</h2>
                     <form name="form" ng-submit="login()" role="form">
@@ -28,8 +33,9 @@
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>                            
+                            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
                             <a ui-sref="app.register" class="btn btn-link">Register</a>
+                            
                         </div>
                     </form>
                 </div>

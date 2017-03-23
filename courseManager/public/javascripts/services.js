@@ -35,9 +35,8 @@ angular.module('app')
     }])
 
     .factory('loginFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
-
-        return $resource(baseURL + "users", {}, {
-            'query': { method: 'GET', isArray: false },
+        return $resource(baseURL + "users/login/:username", {}, {
+            'query': { method: 'GET', isArray: true },
         });
     }])
 

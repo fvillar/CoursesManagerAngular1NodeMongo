@@ -9,26 +9,21 @@ var router = express.Router();
 var mongojs = require('mongojs');
 var db = mongojs('mongodb://localhost/courses', ['users']);
 
-// router.get('/', function (req, res, next) {  
-//     db.users.find({}, function (err, users) {
-//         res.send(users);
-//     });
-// });
+router.get('/', function (req, res, next) {
+  db.users.find({}, function (err, users) {
+    res.send(users);
+  });
+});
 
-router.get('/', function (req, res) {
-  console.log('req', req);
-  
-    db.users.find({ username: req }, function (err, user) {
-        res.send(user);
-    });
+router.get('/login/:username', function (req, res) {
+  db.users.find({ username: req.params.username }, function (err, user) {
+    res.send(user);
+  });
 });
 
 router.post('/', function (req, res) {
 
   var data = req.body;
-
-  console.log('data', data);
-
 
   var saveUser = {
     'firstName': data.firstName,

@@ -118,19 +118,30 @@ angular.module('app')
 
     .controller('LoginController', ['$scope', '$state', '$stateParams', 'loginFactory',
         function ($scope, $state, $stateParams, loginFactory) {
-            $scope.username='';
-            $scope.password=''
+            $scope.username = '';
+            $scope.password = '';
+            $scope.showAlert = false;
+            $scope.message = 'Username or password is incorrect';
 
-            $scope.register = () => {
+            $scope.login = () => {
 
-                registerFactory.save({username: $scope.username, password:$scope.password},
+                loginFactory.query({
+                    username: $scope.username
+                }).$promise.then(
                     (response) => {
-                        $state.go('app.home');
+                        if (response.length > 0) {
+                            if (response[0].password == $scope.password)
+                                $state.go('app.home');
+                            else
+                                $scope.showAlert = true;
+                        } else {
+                            $scope.showAlert = true;
+                        }
                     },
                     (response) => {
-                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                        $scope.showAlert = true
                     }
-                );
+                    );
             }
 
         }])
