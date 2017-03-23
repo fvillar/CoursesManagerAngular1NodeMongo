@@ -73,7 +73,7 @@ angular.module('app')
                     }
                 );
 
-                $state.go('app');
+                $state.go('app.home');
 
             };
         }])
@@ -111,7 +111,7 @@ angular.module('app')
                     }
                 );
 
-                $state.go('app');
+                $state.go('app.home');
 
             };
         }])
