@@ -1,0 +1,28 @@
+<div class="container content">
+    <form class="form-horizontal" name="authorForm" ng-submit="addAuthor()" novalidate>
+
+        <div class="form-group" ng-class="{'has-error': authorForm.inputFirstName.$error.required && !authorForm.inputFirstName.$pristine}">
+            <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" ng-model="author.firstName" ng-required="true">
+                <span ng-show="authorForm.inputFirstName.$error.required && !authorForm.inputFirstName.$pristine">First Name is a required field</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': authorForm.inputLastName.$error.required && !authorForm.inputLastName.$pristine}">
+            <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputLastName" name="inputLastName" ng-model="author.lastName" ng-required="true">
+                <span ng-show="authorForm.inputLastName.$error.required && !authorForm.inputLastName.$pristine">Last Name is a required field</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="submit" class="btn btn-primary" ng-disabled="authorForm.$invalid" ng-click="addAuthor()">Add</button>
+                <button type="button" class="btn btn-danger" ng-class="{active: stateis('app.home')}" ui-sref="app.home">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+</div>

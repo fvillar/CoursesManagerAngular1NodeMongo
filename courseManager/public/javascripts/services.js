@@ -23,7 +23,8 @@ angular.module('app')
     .factory('authorsFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
         return $resource(baseURL + "authors", null, {
-            'query': { method: 'GET', isArray: true }
+            'query': { method: 'GET', isArray: true },
+            'save': { method: 'POST' }
         });
     }])
 

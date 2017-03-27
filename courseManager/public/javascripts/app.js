@@ -65,12 +65,24 @@ angular.module('app', ['ui.router', 'ngResource'])
                 }
             })
 
+             // route for the newCourse page
             .state('app.newCourse', {
                 url: 'course/',
                 views: {
                     'content@': {
                         templateUrl: 'views/newCourse.html',
                         controller: 'AddController'
+                    }
+                }
+            })
+
+             // route for the newAuthor page
+            .state('app.newAuthor', {
+                url: 'author/',
+                views: {
+                    'content@': {
+                        templateUrl: 'views/newAuthor.html',
+                        controller: 'AddAuthorController'
                     }
                 }
             })

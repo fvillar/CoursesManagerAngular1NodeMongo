@@ -21,11 +21,16 @@
                             </span>
                             </a>
                 </li>
+                <li ng-class="{active: stateis('app.newAuthor')}">
+                    <a ui-sref="app.newAuthor">                        
+                        Add Author
+                    </a>
+                </li>                
                 <li ng-class="{active: stateis('app.aboutus')}">
                     <a ui-sref="app.aboutus">                        
                         About Us
                     </a>
-                </li>                
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

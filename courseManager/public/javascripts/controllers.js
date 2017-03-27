@@ -90,7 +90,7 @@ angular.module('app')
                 "authorId": 0,
                 "length": '',
                 "category": '',
-                "username" : $rootScope.username
+                "username": $rootScope.username
             };
 
             $scope.regex = '\\d+:?\\d*';
@@ -173,4 +173,28 @@ angular.module('app')
                     }
                 );
             }
+        }])
+
+    .controller('AddAuthorController', ['$scope', '$rootScope', '$state', '$stateParams', 'authorsFactory',
+        function ($scope, $rootScope, $state, $stateParams, authorsFactory) {
+
+            $scope.author = {
+                "firstName": '',
+                "lastName": ''
+            };
+           
+            $scope.addAuthor = () => {
+
+                authorsFactory.save($scope.author,
+                    (response) => {
+                        $scope.authors = authorsFactory.query();
+                    },
+                    (response) => {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+
+                $state.go('app.home');
+
+            };
         }])

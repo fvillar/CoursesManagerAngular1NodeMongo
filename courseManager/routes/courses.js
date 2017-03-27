@@ -28,7 +28,7 @@ router.post('/', function (req, res) {
 
     // Do an auto-increments
     db.unique.findAndModify({
-        query: {},
+        query: {type: 'courses'},
         update: { $inc: { id: 1 } },
         new: true
     }, function (err, v) {
